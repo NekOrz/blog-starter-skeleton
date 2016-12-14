@@ -22,6 +22,7 @@ class SingleArticlePage extends Component {
     fetch(`/api/articles/${id}`)
       .then(res => res.json())
       .then(json => {
+        // console.log(json);
         this.setState(json);
       });
   }

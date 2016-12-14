@@ -13,7 +13,8 @@ articleRouter.get('/', (req, res) => {
 });
 
 articleRouter.get('/:id', (req, res) => {
-  const id = req.param.id;
+  const id = req.params.id;
+  // console.log(id);
   Article.findById(id, (err, article) => {
     if (err) return res.status(500).send(err);
     return res.json(article);
