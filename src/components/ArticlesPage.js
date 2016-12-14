@@ -10,22 +10,28 @@ class ArticlesPage extends Component {
   }
 
   componentDidMount() {
-    fetch('/api')
+    fetch('/api/articles')
       .then(res => res.json())
       .then(json => {
         this.setState({
           list: json,
         });
+        console.log(json);
+      })
+      .catch(rej => {
+        console.log(rej);
       });
   }
 
   renderArticlesList() {
     const c = [];
+    if (this.state.list === undefined) return;
     for (let i = 0; i < this.state.list.length; i += 1) {
-      c.append(
+      c.push(
         <tr>
-          <th>{i}</th>
+          <th>{i + 1}</th>
           <th>{this.state.list[i].title}</th>
+          <th>{this.state.list[i].tags}</th>
           <th>{this.state.list[i].updated_at}</th>
           <th>{this.state.list[i].created_at}</th>
         </tr>
@@ -46,6 +52,7 @@ class ArticlesPage extends Component {
                 <tr>
                   <th>#</th>
                   <th>Title</th>
+                  <th>Tags</th>
                   <th>Last updated time</th>
                   <th>Created time</th>
                 </tr>
