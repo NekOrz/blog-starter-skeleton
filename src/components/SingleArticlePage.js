@@ -38,12 +38,12 @@ class SingleArticlePage extends Component {
 
   handleTitleChange = evt => {
     this.setState({ title: evt.target.value });
-    console.log('yay');
+    // console.log('yay');
   };
 
   handleContentChange = evt => {
     this.setState({ content: evt.target.value });
-    console.log(this.state.content);
+    // console.log(this.state.content);
   };
 
   handleDelClick = () => {
@@ -91,7 +91,7 @@ class SingleArticlePage extends Component {
   renderContent = () => {
     const { isEditing, content } = this.state;
     if (isEditing) {
-      return <textarea onChange={this.handleConentChange} defaultValue={content} />;
+      return <textarea onChange={this.handleContentChange} defaultValue={content} />;
     }
     return this.state.content;
   }

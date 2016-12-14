@@ -39,7 +39,7 @@ class ArticlesPage extends Component {
         </tr>
       );
     }
-    return c;
+    return c; // eslint-disable-line
   }
 
   render() {

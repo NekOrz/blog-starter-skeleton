@@ -1,7 +1,7 @@
 import 'isomorphic-fetch';
 import React, { Component } from 'react';
-import ReactQuill from 'react-quill';
-import TagsInput from 'react-tagsinput';
+// import ReactQuill from 'react-quill';
+// import TagsInput from 'react-tagsinput';
 
 import 'react-tagsinput/react-tagsinput.css';
 
@@ -21,7 +21,7 @@ class CreateArticlePage extends Component {
 
   handleSubmitClick = () => {
     // console.log(this.state);
-    const confirm = window.confirm('確定要新增文章嗎？');
+    const confirm = window.confirm('確定要新增文章嗎？'); // eslint-disable-line
     if (confirm) {
       const body = JSON.stringify(this.state);
       fetch('/api/articles', {
