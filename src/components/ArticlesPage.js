@@ -16,11 +16,13 @@ class ArticlesPage extends Component {
         this.setState({
           list: json,
         });
-        console.log(json);
-      })
-      .catch(rej => {
-        console.log(rej);
+        // console.log(json);
       });
+      /*
+      .catch(rej => {
+        // console.log(rej);
+      });
+      */
   }
 
   renderArticlesList() {
@@ -30,7 +32,7 @@ class ArticlesPage extends Component {
       c.push(
         <tr>
           <th>{i + 1}</th>
-          <th>{this.state.list[i].title}</th>
+          <th><a href={`#/articles/${this.state.list[i]._id}`}>{this.state.list[i].title}</a></th>
           <th>{this.state.list[i].tags}</th>
           <th>{this.state.list[i].updated_at}</th>
           <th>{this.state.list[i].created_at}</th>

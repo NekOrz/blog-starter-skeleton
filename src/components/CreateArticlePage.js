@@ -16,15 +16,26 @@ class CreateArticlePage extends Component {
     };
     this.updateTitle = this.updateTitle.bind(this);
     this.updateContent = this.updateContent.bind(this);
+    this.updateTags = this.updateTags.bind(this);
   }
 
   handleSubmitClick = () => {
+    // console.log(this.state);
     const confirm = window.confirm('確定要新增文章嗎？');
     if (confirm) {
+      const body = JSON.stringify(this.state);
       fetch('/api/articles', {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
         method: 'POST',
-        body: this.state,
-      });
+        body,
+      })
+      .then(res => res.json());
+      /* .then(json => {
+        console.log(`create good! ${JSON.stringify(json)}`);
+      })*/
     }
   }
 
@@ -36,13 +47,17 @@ class CreateArticlePage extends Component {
 
   updateContent = evt => {
     this.setState({
-      content: evt.target.content,
+      title: this.state.title,
+      content: evt.target.value,
+      tags: this.state.tags,
     });
   }
 
   updateTags = evt => {
     this.setState({
-      tags: evt.target.tags,
+      title: this.state.title,
+      content: this.state.content,
+      tags: evt.target.value,
     });
   }
 

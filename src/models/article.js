@@ -11,7 +11,7 @@ const articleSchema = mongoose.Schema({
   id: String,
   content: String,
   title: String,
-  tags: { type: [String], default: [] },
+  tags: String, // { type: [String], default: [] },
 }, options);
 
 export const Article = mongoose.model('Article', articleSchema);

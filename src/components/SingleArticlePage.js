@@ -38,14 +38,9 @@ class SingleArticlePage extends Component {
 
   handleEditClick = () => {};
 
-  renderTitle = () => {};
+  renderTitle = () => this.state.title;
 
-  renderTags = () => {
-    const { isEditing, tags } = this.state;
-    if (isEditing) {
-
-    }
-  };
+  renderTags = () => this.state.tags;
 
   renderContent = () => {
     const { isEditing, content } = this.state;
@@ -64,7 +59,7 @@ class SingleArticlePage extends Component {
         className="article-main"
         dangerouslySetInnerHTML={{ __html: content }}
       />
-    )
+    );
   };
 
   render() {

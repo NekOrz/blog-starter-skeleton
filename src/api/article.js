@@ -22,7 +22,7 @@ articleRouter.get('/:id', (req, res) => {
 
 articleRouter.post('/', (req, res) => {
   const { title, content, tags } = req.body;
-
+  // console.log(req.body);
   Article.create({ title, content, tags }, (err, article) => {
     if (err) return res.status(500).send(err);
     return res.json(article);
