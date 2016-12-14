@@ -32,7 +32,10 @@ class CreateArticlePage extends Component {
         method: 'POST',
         body,
       })
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(json => {
+        window.location.href = `#/articles/${json._id}`;
+      });
       /* .then(json => {
         console.log(`create good! ${JSON.stringify(json)}`);
       })*/

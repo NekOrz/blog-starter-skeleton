@@ -14,6 +14,7 @@ class SingleArticlePage extends Component {
       tags: [],
       isEditing: false,
     };
+    this.handleContentChange = this.handleContentChange.bind(this);
   }
 
   componentDidMount() {
@@ -31,37 +32,69 @@ class SingleArticlePage extends Component {
     // fetch with id
   }
 
-  handleTagsChange = () => {};
+  handleTagsChange = evt => {
+    this.setState({ tags: evt.target.value });
+  };
 
-  handleTitleChange = () => {};
+  handleTitleChange = evt => {
+    this.setState({ title: evt.target.value });
+    console.log('yay');
+  };
 
-  handleDelClick = () => {};
+  handleContentChange = evt => {
+    this.setState({ content: evt.target.value });
+    console.log(this.state.content);
+  };
 
-  handleEditClick = () => {};
+  handleDelClick = () => {
+    const id = this.props.id;
+    fetch(`/api/articles/${id}`, {
+      method: 'DELETE',
+    })
+    .then(() => {
+      window.location.href = '#/articles';
+    });
+  }
 
-  renderTitle = () => this.state.title;
+  handleEditClick = () => {
+    if (this.state.isEditing) {
+      const body = JSON.stringify(this.state);
+      const id = this.props.id;
+      fetch(`/api/articles/${id}`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body,
+      });
+    }
+    this.setState({ isEditing: !this.state.isEditing });
+  };
 
-  renderTags = () => this.state.tags;
+  renderTitle = () => {
+    const { isEditing, title } = this.state;
+    if (isEditing) {
+      return <input onChange={this.handleTitleChange} value={title} />;
+    }
+    return this.state.title;
+  }
+
+  renderTags = () => {
+    const { isEditing, tags } = this.state;
+    if (isEditing) {
+      return <input onChange={this.handleTagsChange} value={tags} />;
+    }
+    return this.state.tags;
+  }
 
   renderContent = () => {
     const { isEditing, content } = this.state;
     if (isEditing) {
-      return (
-        <ReactQuill
-          theme="snow"
-          value={content}
-          onChange={this.onEditorChange}
-          className={'article-main'}
-        />
-      );
+      return <textarea onChange={this.handleConentChange} defaultValue={content} />;
     }
-    return (
-      <div
-        className="article-main"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-    );
-  };
+    return this.state.content;
+  }
 
   render() {
     const { isEditing } = this.state;
