@@ -1,5 +1,10 @@
 import 'isomorphic-fetch';
 import React, { Component } from 'react';
+import ReactQuill from 'react-quill';
+import TagsInput from 'react-tagsinput'
+
+import 'react-tagsinput/react-tagsinput.css';
+
 
 class CreateArticlePage extends Component {
   constructor(props) {
@@ -14,7 +19,8 @@ class CreateArticlePage extends Component {
   handleSubmitClick = () => {
     const confirm = window.confirm('確定要新增文章嗎？');
     if (confirm) {
-      // fetch here
+      const body = this.body;
+      fetch()
     }
   }
 

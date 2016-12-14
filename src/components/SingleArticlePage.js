@@ -1,5 +1,6 @@
 import 'isomorphic-fetch';
 import React, { Component, PropTypes } from 'react';
+import ReactQuill from 'react-quill';
 
 class SingleArticlePage extends Component {
   static propTypes = {
@@ -17,6 +18,12 @@ class SingleArticlePage extends Component {
 
   componentDidMount() {
     // fetch with id
+    const id = this.props.id;
+    fetch(`/api/articles/${id}`)
+      .then(res => res.json())
+      .then(json => {
+        this.setState(json);
+      });
   }
 
   componentDidUpdate() {
@@ -33,9 +40,32 @@ class SingleArticlePage extends Component {
 
   renderTitle = () => {};
 
-  renderTags = () => {};
+  renderTags = () => {
+    const { isEditing, tags } = this.state;
+    if (isEditing) {
 
-  renderContent = () => {};
+    }
+  };
+
+  renderContent = () => {
+    const { isEditing, content } = this.state;
+    if (isEditing) {
+      return (
+        <ReactQuill
+          theme="snow"
+          value={content}
+          onChange={this.onEditorChange}
+          className={'article-main'}
+        />
+      );
+    }
+    return (
+      <div
+        className="article-main"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    )
+  };
 
   render() {
     const { isEditing } = this.state;
